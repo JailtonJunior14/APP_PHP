@@ -51,14 +51,11 @@ final class AlunoDAO extends DAO{
         $stmt = parent::$conexao->prepare($sql);
 
         $stml->bindValue(1, $id);
-        $stml->bindValue(2, $model->RA);
-        $stml->bindValue(3, $model->Curso);
-
         $stmt->execute();
 
-        $model->Id = parent::$conexao->lastInsertId();
+        
 
-        return $model;
+        return $stmt->fetchObject("App\Model\Aluno");
     }
 
 

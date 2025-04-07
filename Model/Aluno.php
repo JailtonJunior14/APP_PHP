@@ -14,7 +14,7 @@ final class Aluno extends Model{
             if(strlen($value) < 3)
                 throw new Exception("Nome deve ter no minimo 3 caracteres");
 
-                $this->Neme = $value;
+                $this->Nome = $value;
         }
 
         get => $this->Nome ?? null;

@@ -17,7 +17,7 @@ final class AlunoController extends Controller{
             $model->getAllRows();
 
         } catch(Exception $e) {
-            $model->setError("Ocorreu um erro ao buscar os alunos:");
+            $model->setError("Ocorreu um erro ao buscar os alunos: ");
             $model->setError($e->getMessage());
         }
 
