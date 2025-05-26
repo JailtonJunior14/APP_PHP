@@ -8,7 +8,8 @@ use APP\Controller\
     AutorController,
     CategoriaController,
     LivroController,
-    EmprestimoController
+    EmprestimoController,
+    
 
 };
 

@@ -47,7 +47,7 @@
                 {
                     if(isset($_GET['id']))
                     {
-                        $model = $model->getById( (int) $_GET['id']);
+                        $model = $model->selectById( (int) $_GET['id']);
                     }
                 }
             }

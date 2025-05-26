@@ -28,7 +28,7 @@ final class Usuario extends Model{
         } get => $this->$email ?? null;
     }
     
-    public ?string $CPF {
+    public ?string $senha {
         set{
             if(strlen($value) < 3)
                 throw new Exception("senha deve ter no minimo 4 caracteres");
@@ -39,7 +39,7 @@ final class Usuario extends Model{
 
 
     function save() : Usuario{
-        return new AutorDAO()->save($this);
+        return new UsuarioDAO()->save($this);
     }
 
     function getById(int $id) : ?Usuario{

@@ -40,7 +40,7 @@ final class UsuarioDAO extends DAO{
         $stmt->execute();
         $model_usuario->Id = parent::$conexao->lastInsertId();
 
-        return $model;
+        return $model_usuario;
     }
 
 
