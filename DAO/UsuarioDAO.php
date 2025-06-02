@@ -51,13 +51,11 @@ final class UsuarioDAO extends DAO{
         $stmt = parent::$conexao->prepare($sql);
 
         $stmt->bindValue(1, $id);
-        $stmt->bindValue(2, $model_usuario->email);
-        $stmt->bindValue(3, $model_usuario->senha);
 
         $stmt->execute();
 
-        $model->Id = parent::$conexao->lastInsertId();
+        
 
-        return $model_usuario;
+        return $stmt->fetchObject()
     }
 }

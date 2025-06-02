@@ -9,8 +9,7 @@ use APP\Controller\
     CategoriaController,
     LivroController,
     EmprestimoController,
-    
-
+    UsuarioController,
 };
 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -106,5 +105,8 @@ switch($url)
         EmprestimoController::delete();
     break;
 
+    case '/usuario/cadastro':
+        UsuarioController::cadastro();
+    break;
 
 }

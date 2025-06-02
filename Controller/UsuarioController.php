@@ -5,28 +5,28 @@ namespace APP\Controller;
 use App\Model\Usuario;
 use Exception;
 
-    final class UsuarioConttroller extends Controller
+    final class UsuarioController extends Controller
     {
-        public static function index() : void
-        {
-            parent::isProtected(); 
+        // public static function index() : void
+        // {
+        //     parent::isProtected(); 
 
-            $model_usuario = new Usuario();
+        //     $model_usuario = new Usuario();
             
-            try {
-                $model_usuario->getAllRows();
+        //     try {
+        //         $model_usuario->getAllRows();
     
-            } catch(Exception $e) {
-                $model_usuario->setError("Ocorreu um erro ao buscar os autores: ");
-                $model_usuario->setError($e->getMessage());
-            }
+        //     } catch(Exception $e) {
+        //         $model_usuario->setError("Ocorreu um erro ao buscar os autores: ");
+        //         $model_usuario->setError($e->getMessage());
+        //     }
     
-            parent::render('Autor/lista_autor.php', $model_usuario); 
+        //     parent::render('Autor/lista_autor.php', $model_usuario); 
 
-        }
+        // }
         public static function cadastro() : void
         {
-            parent::isProtected(); 
+            //parent::isProtected(); 
     
             $model_usuario = new Usuario();
             
@@ -40,7 +40,7 @@ use Exception;
                     $model_usuario->senha = $_POST['senha'];
                     $model_usuario->save();
     
-                    parent::redirect("/Autor");
+                    parent::redirect("/usuario");
     
                 } else {
         
@@ -55,7 +55,7 @@ use Exception;
                 $model_usuario->setError($e->getMessage());
             }
     
-            parent::render('Autor/form_autores.php', $model_usuario);        
+            parent::render('Usuario/form_usuario.php', $model_usuario);        
         }
     
         public static function delete() : void
