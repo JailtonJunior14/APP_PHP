@@ -24,8 +24,8 @@ final class Usuario extends Model{
             if(strlen($value) < 3)
                 throw new Exception("Email deve ter no minimo 11 caracteres");
 
-                $this->$email = $value;
-        } get => $this->$email ?? null;
+                $this->email = $value;
+        } get => $this->email ?? null;
     }
     
     public ?string $senha {
@@ -33,8 +33,8 @@ final class Usuario extends Model{
             if(strlen($value) < 3)
                 throw new Exception("senha deve ter no minimo 4 caracteres");
 
-                $this->$senha = $value;
-        } get => $this->$senha ?? null;
+                $this->senha = $value;
+        } get => $this->senha ?? null;
     }
 
 

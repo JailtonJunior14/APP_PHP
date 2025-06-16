@@ -13,7 +13,7 @@
         <?= $model->getErrors() ?>
 
         <form method="post" action="/usuario/cadastro" class="p-5">
-            <input name="id" type="hidden" value="<?= $model->id ?>" />
+            <input name="id" type="hidden" value="<?= $model->Id ?>" />
 
             <div class="mb-3">
                 <label for="email" class="form-label">E-Mail:</label>

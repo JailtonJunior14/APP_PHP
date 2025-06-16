@@ -18,9 +18,9 @@ final class AlunoDAO extends DAO{
         $sql = "INSERT INTO aluno (nome, ra, curso) VALUES (?,?,?) ";
         $stmt = parent::$conexao->prepare($sql);
 
-        $stml->bindValue(1, $model->Nome);
-        $stml->bindValue(2, $model->RA);
-        $stml->bindValue(3, $model->Curso);
+        $stmt->bindValue(1, $model->Nome);
+        $stmt->bindValue(2, $model->RA);
+        $stmt->bindValue(3, $model->Curso);
 
         $stmt->execute();
 
@@ -33,10 +33,10 @@ final class AlunoDAO extends DAO{
         $sql = "UPDATE aluno SET nome=?, ra=?, curso=? WHERE id=? ";
         $stmt = parent::$conexao->prepare($sql);
 
-        $stml->bindValue(1, $model->Nome);
-        $stml->bindValue(2, $model->RA);
-        $stml->bindValue(3, $model->Curso);
-        $stml->bindValue(3, $model->Id);
+        $stmt->bindValue(1, $model->Nome);
+        $stmt->bindValue(2, $model->RA);
+        $stmt->bindValue(3, $model->Curso);
+        $stmt->bindValue(3, $model->Id);
         $stmt->execute();
         $model->Id = parent::$conexao->lastInsertId();
 
@@ -50,7 +50,7 @@ final class AlunoDAO extends DAO{
         
         $stmt = parent::$conexao->prepare($sql);
 
-        $stml->bindValue(1, $id);
+        $stmt->bindValue(1, $id);
         $stmt->execute();
 
         
@@ -78,4 +78,5 @@ final class AlunoDAO extends DAO{
         $stmt->bindValue(1, $id);
         return $stmt->execute();
     }
+    
 }
