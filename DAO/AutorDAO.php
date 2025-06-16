@@ -18,12 +18,12 @@
 
         public function insert(Autor $model) : Autor
         {
-            $sql = "INSERT INTO autor (nome, nascimento, cpf) VALUES (?, ?, ?) ";
+            $sql = "INSERT INTO autor (nome, data_nascimento, cpf) VALUES (?, ?, ?) ";
 
             $stmt = parent::$conexao->prepare($sql);
 
             $stmt->bindValue(1, $model->Nome);
-            $stmt->bindValue(2, $model->Nascimento);
+            $stmt->bindValue(2, $model->Data_Nascimento);
             $stmt->bindValue(3, $model->CPF);
             $stmt->execute();
 
@@ -34,11 +34,11 @@
 
         public function update(Autor $model) : Autor
         {
-            $sql = "UPDATE autor SET nome=?, nascimento=?, cpf=? WHERE id=? ";
+            $sql = "UPDATE autor SET nome=?, data_nascimento=?, cpf=? WHERE id=? ";
 
             $stmt = parent::$conexao->prepare($sql);
             $stmt->bindValue(1, $model->Nome);
-            $stmt->bindValue(2, $model->Nascimento);
+            $stmt->bindValue(2, $model->Data_Nascimento);
             $stmt->bindValue(3, $model->CPF);
             $stmt->bindValue(4, $model->Id);
             $stmt->execute();
@@ -51,7 +51,7 @@
             $sql = "SELECT * FROM autor WHERE id=? ";
 
             $stmt = parent::$conexao->prepare($sql);
-            $stmt->bindValue(1, $model->Id);
+            $stmt->bindValue(1, $id);
             $stmt->execute();
 
             return $stmt->fetchObject("APP\Model\Autor");
@@ -72,7 +72,7 @@
             $sql = "DELETE FROM autors WHERE id=? ";
 
             $stmt = parent::$conexao->prepare($sql);
-            $stmt->bindValue(1, $model->Id);
+            $stmt->bindValue(1, $id);
             return $stmt->execute();
         }
     }

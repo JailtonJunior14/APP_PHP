@@ -18,6 +18,7 @@ final class LoginController extends Controller{
             $model = $model->logar();
 
             if($model !== null){
+                $_SESSION["usuario_logado"]  = $model;
                 if(isset($_POST['lembrar'])){
                     setcookie(
                         name: "sistema_biblioteca_usuario",
@@ -26,7 +27,7 @@ final class LoginController extends Controller{
                     );
                 }
 
-                header("Location: /");
+                header("Location:/");
             }else
                 $erro = "Email ou senha incorretos";
         }

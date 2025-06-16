@@ -13,12 +13,12 @@ final class Autor extends Model{
     public ?string $Nome{
         set
         {
-            if(strlen($value)<1)
-            {
-                throw new Exception("O nome deve ter pelo menos 1 caracter");
+            if(strlen($value)<3)
+            
+                throw new Exception("O nome deve ter pelo menos 3 caracter");
 
                 $this->Nome = $value;
-            }
+            
         }
         get=>$this->Nome ?? null;
     }
@@ -27,11 +27,11 @@ final class Autor extends Model{
         set
         {
             if(strlen($value)<11)
-            {
+            
                 throw new Exception("Preencha o CPF corretamente");
 
                 $this->CPF = $value;
-            }
+            
 
             
         }
@@ -39,17 +39,17 @@ final class Autor extends Model{
 
     }
 
-    public ?string $Nascimento{
+    public ?string $Data_Nascimento{
         set
         {
             if(empty($value))
-            {
+            
                 throw new Exception("preencha a data ");
 
-                $this->Nascimento = $value;
-            }
+                $this->Data_Nascimento = $value;
+            
         }
-        get=>$this->Nascimento ?? null;
+        get=>$this->Data_Nascimento ?? null;
     }
 
 
@@ -58,9 +58,9 @@ final class Autor extends Model{
         return new AutorDAO()->save($this);
     }
 
-    function selectById() : ?Autor
+    function selectById(int $id) : ?Autor
     {
-        return new AutorDAO()->selectById($Id);
+        return new AutorDAO()->selectById($id);
     }
 
     function getAllRows() : array
@@ -69,8 +69,8 @@ final class Autor extends Model{
         return $this->rows;
     }
 
-    function delete() : bool
+    function delete(int $id) : bool
     {
-        return new AutorDAO()->delete();
+        return new AutorDAO()->delete($id);
     }
 }
