@@ -19,6 +19,7 @@ final class LoginController extends Controller{
 
             if($model !== null){
                 $_SESSION["usuario_logado"]  = $model;
+                
                 if(isset($_POST['lembrar'])){
                     setcookie(
                         name: "sistema_biblioteca_usuario",
