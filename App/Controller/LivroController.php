@@ -56,9 +56,9 @@ final class LivroController extends Controller
 
         $model = new Livro();
 
-        echo "Estou onde quero";
+        //echo "Estou onde quero";
 
-        var_dump($model->Id_Autores);
+        //var_dump($model->Id_Autores);
         
         try
         {

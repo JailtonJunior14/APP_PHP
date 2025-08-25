@@ -65,7 +65,7 @@ switch($url)
 
     /**Rotas categoria */
 
-    case '/categoria':
+    case '/categoria':        
         CategoriaController::index();
     break;
 

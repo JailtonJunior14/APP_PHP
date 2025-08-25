@@ -1,79 +1,91 @@
 <?php
-    namespace App\Controller;
 
-    use App\Model\Categoria;
-    use Exception;
+namespace App\DAO;
 
-    final class CategoriaConrtoller extends Controller
+use App\Model\Categoria;
+
+
+final class CategoriaDAO extends DAO
+{
+     
+    public function __construct()
     {
-        public static function index() : void
-        {
-            parent::isProtected();
-
-            $model = new Categoria();
-
-            try
-            {
-                $model->getAllRows();
-            }
-            catch(Exception $e)
-            {
-                $model->setError("Ocorreu um erro ao buscar os categorias:");
-                $model->setError($e->getMessage());
-            }
-
-            parent::render('Categoria/lista_categoria.php', $model);
-        }
-
-        public static function cadasrto() : void
-        {
-            parent::isProtected();
-
-            $model = new Categoria();
-
-            try
-            {
-                if(parent::isPost())
-                {
-                    $model->Id = !empty($_POST['id']) ? $_POST['id'] : null;
-                    $model->Descricao = $_POST['descricao'];
-                    $model->save();
-
-                    parent::redirect("/categoria");
-                }
-                else
-                {
-                    if(isset($_GET['id']))
-                    {
-                        $model = $model->getById( (int) $_GET['id']);
-                    }
-                }
-            }
-            catch(Exception $e)
-            {
-                $model->setError($e->getMessage());
-            }
-
-            parent::render('Categoria/form_categoria.php', $model);   
-        }
-
-        public static function delete() : void
-        {
-            parent::isProtected();
-
-            $model = new Categoria();
-
-            try
-            {
-                $model->delete( (int) $_GET['id']);
-                parent::redirect("/categoria");
-            }
-            catch (Exception $e)
-            {
-                $model->setError("Ocorreu um erro ao excluir o categoria:");
-                $model->setError($e->getMessage());
-            }
-
-            parent::render('Categoria/form_categoria.php', $model);   
-        }
+        
+        parent::__construct();
     }
+
+    public function save(Categoria $model) : Categoria
+    {
+       
+        return ($model->Id == null) ? $this->insert($model) : $this->update($model);
+    }
+
+
+   
+    public function insert(Categoria $model) : Categoria
+    {
+        
+        $sql = "INSERT INTO categoria (descricao) VALUES (?) ";
+
+        $stmt = parent::$conexao->prepare($sql);
+        
+       
+        $stmt->bindValue(1, $model->Descricao);
+
+      
+        $stmt->execute();
+
+        $model->Id = parent::$conexao->lastInsertId();
+        
+        return $model;
+    }
+
+
+
+    public function update(Categoria $model) : Categoria
+    {
+        $sql = "UPDATE categoria SET descricao=? WHERE id=? ";
+
+        $stmt = parent::$conexao->prepare($sql);
+        $stmt->bindValue(1, $model->Descricao);
+        $stmt->bindValue(2, $model->Id);
+        $stmt->execute();
+        
+        return $model;
+    }
+
+
+  
+    public function selectById(int $id) : ?Categoria
+    {
+        $sql = "SELECT * FROM categoria WHERE id=? ";
+
+        $stmt = parent::$conexao->prepare($sql);  
+        $stmt->bindValue(1, $id);
+        $stmt->execute();
+
+        return $stmt->fetchObject("App\Model\Categoria");
+    }
+
+
+    
+    public function select() : array
+    {
+        $sql = "SELECT * FROM categoria ";
+
+        $stmt = parent::$conexao->prepare($sql);  
+        $stmt->execute();
+
+        return $stmt->fetchAll(DAO::FETCH_CLASS, "App\Model\Categoria");
+    }
+
+  
+    public function delete(int $id) : bool
+    {
+        $sql = "DELETE FROM categoria WHERE id=? ";
+
+        $stmt = parent::$conexao->prepare($sql);  
+        $stmt->bindValue(1, $id);
+        return $stmt->execute();
+    }
+}

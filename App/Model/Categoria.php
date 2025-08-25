@@ -2,8 +2,7 @@
 
 namespace APP\Model;
 
-
-use APP\DAO\AutorDAO;
+use App\DAO\CategoriaDAO;
 use Exception;
 
 
@@ -16,10 +15,10 @@ final class Categoria extends Model{
         set
         {
             if(strlen($value)<4)
-            {
+            
                 throw new Exception("Digite uma descrição valida");
                 $this->Descricao = $value;
-            }
+            
         }
         get=>$this->Descricao ?? null;
     }
@@ -30,9 +29,9 @@ final class Categoria extends Model{
         return new CategoriaDAO()->save($this);
     }
 
-    function selectById() : ?Categoria
+    function getById(int $id) : ?Categoria
     {
-        return new CategoriaDAO()->selectById($Id);
+        return new CategoriaDAO()->selectById($id);
     }
 
     function getAllRows() : array
@@ -42,9 +41,9 @@ final class Categoria extends Model{
         return $this->rows;
     }
 
-    function delete() : bool
+    function delete(int $id) : bool
     {
-        return new CategoriaDAO()->delete();
+        return new CategoriaDAO()->delete($id);
     }
 
 
